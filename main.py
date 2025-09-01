@@ -29,7 +29,11 @@ PRESETS_FEW = [
 INVERT = {"🟥": "🟦", "🟦": "🟥"}
 wrap = lambda s: f"[ {s} ]"
 header = lambda s: f"==== {s} ====\n"
-clear = lambda: print("\n"*100)
+
+
+def clear():
+    input("\n[Press Enter to clear screen]")
+    print("\n"*100)
 
 
 def play(sound):
@@ -111,7 +115,6 @@ def new_round(new_game=False):
     chamber, show = load()
     previous = chamber[:]
     print(show)
-    input()
     clear()
 
     while chamber:
@@ -148,7 +151,6 @@ def new_round(new_game=False):
             else:
                 print(wrap(phone(chamber)))
 
-            input()
             clear()
 
         elif choice == "MEDICINE":
@@ -167,17 +169,14 @@ def new_round(new_game=False):
 
         elif choice == "! SHELL COUNT":
             print(wrap(len(chamber)))
-            input()
             clear()
 
         elif choice == "! SHOW":
             print(f"{chamber.count("🟥")} LIVE // {chamber.count("🟦")} BLANK")
-            input()
             clear()
 
         elif choice == "! FULL VIEW":
             print(wrap(chamber))
-            input()
             clear()
 
         print()
