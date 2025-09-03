@@ -1,6 +1,6 @@
 # Chambered Steel
 
-An accompanying program for a Buckshot-Roulette-like card game.
+An accompanying program for a Buckshot Roulette-like card game.
 
 ## Usage
 
