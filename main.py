@@ -157,7 +157,7 @@ def new_round(new_game=False):
             print(random.choice(["+2 HEALTH", "-1 HEALTH"]))
 
         elif choice == "UNDO":
-            if chamber == previous:
+            if chamber != previous:
                 chamber = previous
                 print("RESTORED LAST SHELL")
             else:
@@ -168,7 +168,7 @@ def new_round(new_game=False):
             print("ENDING ROUND")
 
         elif choice == "! SHELL COUNT":
-            print(wrap(len(chamber)))
+            print(len(chamber))
             clear()
 
         elif choice == "! SHOW":
@@ -176,7 +176,7 @@ def new_round(new_game=False):
             clear()
 
         elif choice == "! FULL VIEW":
-            print(wrap(chamber))
+            print(chamber)
             clear()
 
         print()
