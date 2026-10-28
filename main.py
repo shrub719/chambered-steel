@@ -1,4 +1,5 @@
-import random, threading, playsound
+import random, threading
+import playsound3 as playsound
 
 
 SOUNDS = {
