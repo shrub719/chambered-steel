@@ -31,6 +31,9 @@ function trans(id) {
     get("transition").classList.add("active");
     get(pane).classList.remove("active");
     setTimeout(() => {
+        if (chamber.length == 0) {
+            id = "start";
+        }
         get(id).classList.add("active");
         get("transition").classList.remove("active");
         pane = id;
@@ -90,10 +93,7 @@ function displayShell(img, live) {
 }
 
 function click(id) {
-    if (chamber.length == 0) {
-        trans("start");
-        return;
-    } else if (inTransition) {
+    if (inTransition) {
         return;
     }
 
