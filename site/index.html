@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CHAMBERED STEEL</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./style.css">
+    </head>
+
+    <body>
+        <div class="window"> 
+            <div class="pane" id="transition"></div>
+            <div class="pane" id="start">
+                <button id="round">NEXT ROUND</button><br />
+                <button id="game">NEW GAME</button><br />
+            </div>
+            <div class="pane" id="info-1">
+                <p class="info" id="info-health">X HEALTH</p>
+                <p class="info" id="info-items">DRAW X</p>
+            </div>
+            <div class="pane" id="info-2">
+                <p class="info" id="info-live">X LIVES</p>
+                <p class="info" id="info-blank">X BLANK</p>
+            </div>
+            <div class="pane" id="select">
+                <button id="fire">FIRE</button><br />
+                <button id="eject">EJECT</button><br />
+                <button id="invert">INVERT</button><br />
+                <button id="glass">GLASS</button><br />
+                <button id="phone">PHONE</button><br />
+                <button id="med">MEDICINE</button><br />
+                <button id="end">END</button><br />
+            </div>
+            <div class="pane" id="fire-pane">
+                <img id="gun" src="./assets/gun.png" />
+            </div>
+            <div class="pane" id="eject-pane">
+                <img class="shell" id="eject-shell" />
+            </div>
+            <div class="pane" id="invert-pane">
+                <p class="info" id="info-invert">POLARITY SWAPPED</p>
+            </div>
+            <div class="pane" id="glass-pane">
+                <img class="shell" id="glass-shell" />
+            </div>
+            <div class="pane" id="phone-pane">
+                <p class="info" id="info-phone">POS X</p>
+                <img class="shell" id="phone-shell" />
+            </div>
+            <div class="pane" id="med-pane">
+                <p class="info" id="info-med">X HEALTH</p>
+            </div>
+        </div>
+        <script src="./script.js"></script>
+    </body>
+</html>
