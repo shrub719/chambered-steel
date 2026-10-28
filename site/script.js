@@ -122,11 +122,12 @@ function click(id) {
             break;
         case "invert":
             trans("invert-pane");
-            chamber[-1] = !chamber[-1];
+            let shell = chamber.at(-1);
+            chamber[chamber.length - 1] = !shell;
             break;
         case "glass":
             trans("glass-pane");
-            let glass = chamber[-1];
+            let glass = chamber.at(-1);
             displayShell(get("glass-shell"), glass);
             break;
         case "phone":
