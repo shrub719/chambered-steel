@@ -12,6 +12,7 @@ const sfxLive = new Audio("./assets/sfx/live.wav");
 const sfxBlank = new Audio("./assets/sfx/blank.wav");
 let chamber = [];
 let pane = "transition";
+let inTransition = false;
 
 function get(id) {
     return document.getElementById(id);
@@ -26,12 +27,14 @@ function play(live) {
 }
 
 function trans(id) {
+    inTransition = true;
     get("transition").classList.add("active");
     get(pane).classList.remove("active");
     setTimeout(() => {
         get(id).classList.add("active");
         get("transition").classList.remove("active");
         pane = id;
+        inTransition = false;
     }, 250);
 }
 
@@ -66,6 +69,8 @@ function initRound(newGame) {
     const preset = presets[Math.floor(Math.random() * presets.length)];
     const live = preset[0];
     const blank = preset[1];
+    get("info-live").textContent = `${live} LIVE`;
+    get("info-blank").textContent = `${blank} BLANK`;
     chamber = [];
     for (let i = 0; i < live; i++) {
         chamber.push(true); 
@@ -76,7 +81,22 @@ function initRound(newGame) {
     shuffle(chamber);
 }
 
+function displayShell(img, live) {
+    if (live) {
+        img.src = "./assets/live.png";
+    } else {
+        img.src = "./assets/blank.png";
+    }
+}
+
 function click(id) {
+    if (chamber.length == 0) {
+        trans("start");
+        return;
+    } else if (inTransition) {
+        return;
+    }
+
     switch(id) {
         case "round":
             trans("info-1");
@@ -97,23 +117,44 @@ function click(id) {
             break;
         case "eject":
             trans("eject-pane");
+            let eject = chamber.pop();
+            displayShell(get("eject-shell"), eject);
             break;
         case "invert":
             trans("invert-pane");
+            chamber[-1] = !chamber[-1];
             break;
         case "glass":
             trans("glass-pane");
+            let glass = chamber[-1];
+            displayShell(get("glass-shell"), glass);
             break;
         case "phone":
             trans("phone-pane");
+            if (chamber.length >= 3) {
+                let pos = Math.floor(Math.random() * (chamber.length - 2)) + 3;
+                let phone = chamber[chamber.length - pos];
+                displayShell(get("phone-shell"), phone);
+                get("info-phone").textContent = `POS ${pos}`;
+            } else {
+                get("phone-shell").src = "./assets/static.png";
+                get("info-phone").textContent = "HOW UNFORTUNATE...";
+            }
             break;
         case "med":
             trans("med-pane");
+            let flip = Math.random() < 0.5;
+            if (flip) {
+                get("info-med").textContent = "+2 HEALTH";
+            } else {
+                get("info-med").textContent = "-1 HEALTH";
+            }
             break;
         case "fire-pane":
-            let shot = true;
+            let shot = chamber.pop();
             play(shot);
             if (shot) { get("gun").classList.add("shot"); }
+            inTransition = true;
 
             setTimeout(() => {
                 trans("select");
