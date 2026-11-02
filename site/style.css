@@ -35,6 +35,11 @@ div.pane#fire-pane {
     background-color: black;
 }
 
+div.pane#history-pane {
+    padding-bottom: 50px;
+    overflow-y: scroll; 
+}
+
 p, button {
     margin: 10px 0 10px 0;
 }

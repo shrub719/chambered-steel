@@ -10,6 +10,7 @@ const presets = [
 ];
 const sfxLive = new Audio("./assets/sfx/live.wav");
 const sfxBlank = new Audio("./assets/sfx/blank.wav");
+const transitionTime = 250;
 let chamber = [];
 let pane = "transition";
 let inTransition = false;
@@ -38,7 +39,7 @@ function trans(id) {
         get("transition").classList.remove("active");
         pane = id;
         inTransition = false;
-    }, 250);
+    }, transitionTime);
 }
 
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -59,6 +60,9 @@ function shuffle(array) {
 }
 
 function initRound(newGame) {
+    clearHistory();
+    record("ROUND STARTED");
+
     if (newGame) {
         let health = Math.floor(Math.random() * 3) + 3;
         get("info-health").textContent = `${health} HEALTH`;
@@ -90,6 +94,28 @@ function displayShell(img, live) {
     } else {
         img.src = "./assets/blank.png";
     }
+}
+
+function clearHistory() {
+    const history = get("history-pane");
+    history.textContent = "";
+    const button = document.createElement("button");
+    button.id = "history-return";
+    button.textContent = "RETURN";
+    button.addEventListener("click", () => { click(button.id) });
+    history.append(button);
+
+    const br = document.createElement("br");
+    history.append(br);
+    const dummy = document.createElement("button");
+    history.append(dummy);
+}
+
+function record(text) {
+    const entry = document.createElement("p");
+    entry.classList.add("info");
+    entry.innerText = text;
+    get("history-pane").prepend(entry);
 }
 
 function click(id) {
@@ -151,6 +177,13 @@ function click(id) {
                 get("info-med").textContent = "-1 HEALTH";
             }
             break;
+        case "history":
+            trans("history-pane");
+
+            setTimeout(() => {
+                get("history-pane").scrollTop = get("history-pane").scrollHeight;
+            }, transitionTime);
+            break;
         case "fire-pane":
             let shot = chamber.pop();
             play(shot);
@@ -167,6 +200,7 @@ function click(id) {
         case "glass-pane":
         case "phone-pane":
         case "med-pane":
+        case "history-return":
             trans("select");
             break;
         case "end":
