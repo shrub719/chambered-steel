@@ -35,6 +35,8 @@ Lives are **red**; blanks are **blue**.
 - `GLASS`: Shows the polarity of the next shell **without ejecting**.
 - `PHONE`: Shows the polarity of a random shell at position three or later.
 - `MEDICINE`: Flips a coin: randomly gives `+2 HEALTH` or `-1 HEALTH`.
+- `HISTORY`: Game log. Not a game mechanic, but used if an action gets missed by
+other players.
 - `END`: End the game early if only one player remains standing.
 
 ### Between games
