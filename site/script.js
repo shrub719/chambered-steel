@@ -60,24 +60,27 @@ function shuffle(array) {
 }
 
 function initRound(newGame) {
-    clearHistory();
-    record("ROUND STARTED");
-
     if (newGame) {
+        clearHistory();
+        record("GAME STARTED");
         let health = Math.floor(Math.random() * 3) + 3;
         get("info-health").textContent = `${health} HEALTH`;
+        record(`${health} HEALTH`);
     } else {
         get("info-health").textContent = "";
     }
 
+    record("ROUND STARTED");
     let draw = Math.floor(Math.random() * 3) + 2;
     get("info-items").textContent = `DRAW ${draw}`;
+    record(`DRAW ${draw}`);
 
     const preset = presets[Math.floor(Math.random() * presets.length)];
     const live = preset[0];
     const blank = preset[1];
     get("info-live").textContent = `${live} LIVE`;
     get("info-blank").textContent = `${blank} BLANK`;
+    record(`${live} // ${blank}`);
     chamber = [];
     for (let i = 0; i < live; i++) {
         chamber.push(true); 
@@ -93,6 +96,14 @@ function displayShell(img, live) {
         img.src = "./assets/live.png";
     } else {
         img.src = "./assets/blank.png";
+    }
+}
+
+function printShell(live) {
+    if (live) {
+        return "LIVE";
+    } else {
+        return "BLANK";
     }
 }
 
@@ -115,7 +126,7 @@ function record(text) {
     const entry = document.createElement("p");
     entry.classList.add("info");
     entry.innerText = text;
-    get("history-pane").prepend(entry);
+    get("history-return").before(entry);
 }
 
 function click(id) {
@@ -145,11 +156,13 @@ function click(id) {
             trans("eject-pane");
             let eject = chamber.pop();
             displayShell(get("eject-shell"), eject);
+            record(printShell(eject) + " EJECTED")
             break;
         case "invert":
             trans("invert-pane");
             let shell = chamber.at(-1);
             chamber[chamber.length - 1] = !shell;
+            record("INVERTED");
             break;
         case "glass":
             trans("glass-pane");
@@ -173,8 +186,10 @@ function click(id) {
             let flip = Math.random() < 0.5;
             if (flip) {
                 get("info-med").textContent = "+2 HEALTH";
+                record("+2 MEDS USED");
             } else {
                 get("info-med").textContent = "-1 HEALTH";
+                record("-1 MEDS USED");
             }
             break;
         case "history":
@@ -188,6 +203,7 @@ function click(id) {
             let shot = chamber.pop();
             play(shot);
             if (shot) { get("gun").classList.add("shot"); }
+            record(printShell(shot) + " SHOT");
             inTransition = true;
 
             setTimeout(() => {
