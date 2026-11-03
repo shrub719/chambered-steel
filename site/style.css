@@ -31,12 +31,12 @@ div.pane.active {
     width: 100%;
 }
 
-div.pane#fire-pane {
-    background-color: black;
-}
-
 div.pane#history-pane {
     overflow-y: scroll; 
+}
+
+div.pane#glass-pane, div.pane#phone-pane, div.pane#fire-pane {
+    background-color: black;
 }
 
 p, button {
