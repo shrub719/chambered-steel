@@ -34,6 +34,7 @@ function trans(id) {
     setTimeout(() => {
         if (chamber.length == 0) {
             id = "start";
+            record("ROUND FINISHED")
         }
         get(id).classList.add("active");
         get("transition").classList.remove("active");
@@ -166,11 +167,13 @@ function click(id) {
             break;
         case "glass":
             trans("glass-pane");
+            record("GLASS USED");
             let glass = chamber.at(-1);
             displayShell(get("glass-shell"), glass);
             break;
         case "phone":
             trans("phone-pane");
+            record("PHONE USED");
             if (chamber.length >= 3) {
                 let pos = Math.floor(Math.random() * (chamber.length - 2)) + 3;
                 let phone = chamber[chamber.length - pos];
@@ -211,15 +214,17 @@ function click(id) {
                 get("gun").classList.remove("shot");
             }, 1500);
             break;
+        case "history-return":
+            record("RECORD ACCESSED");
         case "eject-pane":
         case "invert-pane":
         case "glass-pane":
         case "phone-pane":
         case "med-pane":
-        case "history-return":
             trans("select");
             break;
         case "end":
+            record("ROUND END FORCED")
             trans("start");
             break;
     }

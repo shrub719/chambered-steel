@@ -36,7 +36,6 @@ div.pane#fire-pane {
 }
 
 div.pane#history-pane {
-    padding-bottom: 50px;
     overflow-y: scroll; 
 }
 
