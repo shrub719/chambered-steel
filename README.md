@@ -20,18 +20,22 @@ On start, the site begins a new game. At the start of the game, you are told:
 - The number of items to draw per player
 - The number of live shells, and the number of blank shells
 
-Tap to advance the game.
+Distribute health counters to players and deal
+the required number of item cards face up in front of each player.  
+Players with more than 8 item cards should discard until they have 8.
+
+Tap to begin the round.
 
 ### In-game
 
-**Standard rules:** Players take turns holding the gun. On their turn, 
+Players take turns holding the gun. On their turn, 
 they can play item cards with certain effects before shooting themselves or another
 player.  
 If they have shot themselves with a blank, it remains their turn. Otherwise
 play continues.  
 Anybody shot with a live shell loses 1 health; reaching 0 health eliminates
-you from the game, even when a new round is started. Health cannot go above
-the current maximum when using healing items.
+you, until a **new game** (not round) is started. Health cannot go above
+the current maximum when using healing items.  
 
 Pass the device around to the player currently taking their turn.  
 The options on the site allow for the player to apply and view the effects of
